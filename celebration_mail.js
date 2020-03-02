@@ -78,8 +78,8 @@ setTimeout(() => {
        if (greetings.length != 0) {
             for (let j = 0; j < greetings.length; j++) {
                 var nd2 = new Date(utc + (3600000 * greetings[j].offset));
-              //  if (nd2.getHours() + "-" + nd2.getMinutes() == "17-32")
-              if (nd2.getHours() == 10)
+               if (nd2.getHours() + "-" + nd2.getMinutes() == "18-00")
+              
                {
                     //send mail to those in greetings array
                     let transporter = nodemailer.createTransport({
@@ -162,8 +162,8 @@ setTimeout(() => {
                         secure: false,
                         port: 25,
                         auth: {
-                            user: 'nehanegi05966@gmail.com',
-                            pass: 'intelpentium+'
+                            user: 'putyourmailacc@gmail.com',
+                            pass: 'yourpassword'
                         },
                         tls: {
                             rejectUnauthorized: false
