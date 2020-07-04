@@ -5,7 +5,6 @@ async function connectDb(connection) {
       `SELECT MONTH(employee.event_date) AS MONTH , employee_id, DAY(employee.event_date) AS DAY, offset , event_name, first_name,email, flag from employee `,
       function(err, result, field) {
         if (!err) {
-          console.log("connectDb fetched a result succesfully");
           resolve(result);
         } else {
           console.log(err);
@@ -21,10 +20,9 @@ async function choice(connection) {
       `SELECT choices.* , employee.email, employee.employee_id FROM employee JOIN choices  ON employee.employee_id = choices.employee_id  WHERE choices.employee_id = employee.employee_id `,
       function(err, result, field) {
         if (!err) {
-          console.log('inside promise "choice"');
           resolve(result);
         } else {
-          console.log(err, "choice err");
+          console.log(err);
         }
       }
     );
@@ -38,8 +36,6 @@ async function getCurrentUserChoices(connection, resobj2) {
       resobj2.employee_id,
       function(err, result, field) {
         if (!err) {
-          console.log("getUserChoices result is:");
-          console.log(result);
           resolve(result);
         } else {
           console.log(err);

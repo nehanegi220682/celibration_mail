@@ -10,15 +10,11 @@ const YOUR_PASSWORD = process.env.YOUR_PASSWORD;
 // SEND MAIL if time matched
 //PUT FLAG = 1
 async function sendGreetingMail(greetings, notification) {
-  console.log("yayMEAIL PASWORDI ISS", YOUR_EMAIL, YOUR_PASSWORD);
   var d = new Date();
   var utc = d.getTime() + d.getTimezoneOffset() * 60000;
-  console.log("GREETINGS INSIDE MAIL IS", greetings);
   if (greetings.length != 0) {
     for (let j = 0; j < greetings.length; j++) {
       var nd2 = new Date(utc + 3600000 * greetings[j].offset);
-      console.log("inside send greeting mail nd2 hours and minutues are:");
-      console.log(nd2.getHours() + "-" + nd2.getMinutes());
       //match 8 AM
       if (nd2.getHours() + "-" + nd2.getMinutes() == "23-26") {
         //send mail to those in greetings array
@@ -47,30 +43,20 @@ async function sendGreetingMail(greetings, notification) {
           if (error) {
             return console.log(error);
           }
-          console.log("the message was sent");
-          console.log("GOT INFOOOO");
-          // console.log(info);
           connection.query(
             `UPDATE db_employees.employee SET flag = 1 WHERE email = (?) `,
             greetings[j].email,
             function(err, result, field) {
               if (!err) {
-                console.log("no error in set flag");
                 console.log(result);
               } else {
-                console.log("no error in set flag");
                 console.log(err);
               }
             }
           );
           greetings = greetings.splice(j, 1);
-          console.log("after splice GREETINGS ARRAY is", greetings);
-
+          //function to update flag again to 0 after 1 day
           setTimeout(function() {
-            console.log(
-              "I AM INSIDE SETTIMEOUT FLAG AND GGREETINGS MAIL  IS",
-              greetings[j].email
-            );
             connection.query(
               `UPDATE db_employees.employee SET flag = 0 WHERE email = (?) `,
               greetings[j].email,
@@ -82,7 +68,7 @@ async function sendGreetingMail(greetings, notification) {
                 }
               }
             );
-          }, 50000); //86400000
+          }, 86400000);
         });
       }
     }
@@ -129,8 +115,6 @@ async function sendNotificationMail(notification) {
         if (error) {
           return console.log(error);
         }
-        console.log("the message was sent");
-        console.log(info);
         notification = notification.splice(k, 1);
       });
     }

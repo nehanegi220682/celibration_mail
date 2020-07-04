@@ -9,28 +9,11 @@ function checkForBlacklist(user, subscribers, notification) {
   return getCurrentUserChoices(connection, user).then(
     currentUser_friendlist => {
       //check if resobj blacklist == subscribers
-      console.log("user object inside  checkblacklist is:");
-      console.log(user);
-      console.log("subscribers are");
-      console.log(subscribers);
-      console.log("pushING to array notification");
-      console.log("userfriendlist len:" + currentUser_friendlist.length);
-      console.log("subscribers len is " + subscribers.length);
-
       var temp = 0;
       for (let i = 0; i < subscribers.length; i++) {
-        console.log("inside first loop");
         for (let j = 0; j < currentUser_friendlist.length; j++) {
-          console.log("inside 2nd for loop");
-          console.log(subscribers);
-          console.log(subscribers[i].email);
-          console.log("notification array is:");
-          console.log(notification);
           if (subscribers[i].email == currentUser_friendlist[j].blacklist) {
             temp = 1;
-            console.log(
-              "subscribers[i].email is under blacklist and a subscriber"
-            );
             break;
           }
         }
@@ -41,8 +24,6 @@ function checkForBlacklist(user, subscribers, notification) {
           subscribers[i].event_name = currentUser_friendlist[0].event_name;
           subscribers[i].event_address = currentUser_friendlist[0].email;
           notification.push(subscribers[i]);
-          console.log("pushed to array notification");
-          console.log(notification);
         }
       }
     }
